@@ -1,0 +1,9 @@
+pyjwt
+fastapi
+httpx
+pandas
+pg8000
+pydantic
+requests
+SQLAlchemy
+uvicorn[standard]

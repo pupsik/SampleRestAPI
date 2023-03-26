@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+
+  liquibase:
+    image: liquibase/liquibase:4.19
+    container_name: liquibase
+    working_dir: /liquibase/changelog
+    command: --defaults-file=liquibase.properties --changelog-file=master-changelog.sql update
+    depends_on:
+      - postgres
+    volumes:
+      - ./database/:/liquibase/changelog/
+
+  fast-api:
+    environment:
+      - ENV=docker
+    build:
+      context: .
+      dockerfile: docker/fast-api.dockerfile
+    container_name: fastapi-app
+    command: "python -m uvicorn app:app --app-dir /app/fast_api --host 0.0.0.0 --port 5000 --reload"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ".:/app"
+    depends_on:
+      - liquibase
