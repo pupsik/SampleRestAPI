@@ -82,3 +82,13 @@ Documentation can be accessed at:
 ```
 http://localhost:5000/docs
 ```
+
+### Future Considerations
+
+1. Add request logging
+2. Add performance stats logging
+3. Invest in more robust error handling
+4. Enhance authorization logic
+5. Add rate limiting
+6. Add automated testing
+7. Set up deployment pipeline
