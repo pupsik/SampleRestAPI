@@ -8,11 +8,13 @@ Sample FastAPI that loads a csv spreadsheet into a database and implements few b
 
 ### Quick Start
 
+Begin by cloing this repository.
+
 #### Running Service Locally
 
 This tutorial expects that you have docker installed locally and have understanding of how to use it. If you don't have docker installed, please follow the instructions [here](https://docs.docker.com/engine/install):
 
-In your terminal, run the following commands:
+In your terminal, run the following command:
 
 ```
 docker compose up fast-api
@@ -20,7 +22,7 @@ docker compose up fast-api
 
 #### Obtaining JWT Token
 
-Clone this respository. The API implements basic authorization using self-signed JWT tokens. In order to obtain the JWT token, please run the following code:
+The API implements basic authorization using self-signed JWT tokens. In order to obtain the JWT token, please run the following code:
 
 ```
 import jwt
@@ -32,6 +34,8 @@ payload = {
 
 encoded_jwt = jwt.encode(payload, "secret", algorithm="HS256")
 ```
+
+The API only validates that the token can be decoded.
 
 #### Making Requests
 
@@ -71,7 +75,7 @@ curl -X PUT http://localhost:5000/api/property/1001254 -H "Content-Type: applica
 
 ```
 
-###Documentation
+### Documentation
 
 Documentation can be accessed at:
 
