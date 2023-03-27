@@ -1,7 +1,9 @@
 from typing import Optional
+
 from pydantic import BaseModel
 
-class UpdateListing(BaseModel):
+
+class UpdateProperty(BaseModel):
     name: Optional[str]
     neighbourhood: Optional[str]
     instant_bookable: Optional[bool]

@@ -1,11 +1,8 @@
-# import sys
-
-# sys.path.insert(0, "//home/rita/Desktop/local/AirBnB-api")
-
 import datetime
 import json
+import logging
 import os
-from datetime import date, datetime
+from datetime import datetime
 from typing import Dict
 
 import pandas as pd
@@ -14,6 +11,8 @@ from sqlalchemy.ext.automap import automap_base
 
 from fast_api.v1.populate.loader import CSVLoader
 from fast_api.v1.settings import ENGINE
+
+logger = logging.getLogger(__name__)
 
 FILE_PATH = filepath = os.path.join(
     os.path.dirname(os.path.realpath(__file__)), "airbnb_nyc_clean.csv"
@@ -51,11 +50,14 @@ def populate_database() -> None:
     filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), ".db.lock")
     if os.path.exists(filepath):
         return "Database is already populated. Skipping"
-
+    logger.warn("------> Preparing datasets")
     datasets = prepare_datasets()
+    logger.warn("------> Truncating tables")
     truncate_db(ENGINE)
     # Write resulting datasets to database
+    logger.warn("------> Writing to database")
     for name, df in datasets.items():
+        logger.warn(f"------> Writing table: {name}")
         df.to_sql(name, ENGINE, if_exists="append", index=False)
     message = f"Update completed at {datetime.now().strftime('%m/%d/%Y, %H:%M:%S')}"
     with open(filepath, "w+") as f:

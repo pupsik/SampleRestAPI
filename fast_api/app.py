@@ -1,14 +1,14 @@
 import logging
 import time
-import jwt
 from dataclasses import asdict
 from typing import Callable
 
+import jwt
 from fastapi import FastAPI, Request, Response, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from pydantic.error_wrappers import ValidationError
-from sqlalchemy import URL, text
+from sqlalchemy import text
 
 from fast_api.v1.endpoints import home
 from fast_api.v1.populate.populate_db import populate_database
@@ -17,7 +17,8 @@ from fast_api.v1.settings import ENGINE, SETTINGS
 logger = logging.getLogger(__name__)
 
 description = """
-    Sample AirBnB API
+    Sample AirBnB API:  This is a sample project that loads data from a csv file and exposes a few endpoints 
+    to interact with the data. 
     """
 
 app = FastAPI(

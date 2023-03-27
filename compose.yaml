@@ -7,8 +7,11 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=my_database
     ports:
       - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   liquibase:
     image: liquibase/liquibase:4.19
@@ -34,3 +37,5 @@ services:
       - ".:/app"
     depends_on:
       - liquibase
+volumes:
+  postgres_data:

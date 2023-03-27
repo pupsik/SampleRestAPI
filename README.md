@@ -70,3 +70,11 @@ curl -H "Authorization":"Bearer <token>" http://localhost:5000/api/property/summ
 curl -X PUT http://localhost:5000/api/property/1001254 -H "Content-Type: application/json" -H "Authorization":"Bearer <token>"  -d '{"name":"updated name to test the put request"}'
 
 ```
+
+###Documentation
+
+Documentation can be accessed at:
+
+```
+http://localhost:5000/docs
+```
